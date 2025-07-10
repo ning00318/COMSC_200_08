@@ -26,8 +26,8 @@ public:
     Polynomial &operator-=(const Polynomial&);
 
 private:
-    std::vector<int> coefficient;
-    std::vector<int> exponent;
+    std::vector<int> coefficients;
+    std::vector<int> exponents;
 };
 
 #endif
