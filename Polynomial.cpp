@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <algorithm>
 #include "Polynomial.h"
 using namespace std;
 
@@ -39,40 +40,53 @@ void Polynomial::enterTerms()
     cout << endl;
 }
 
-// FIXME
 void Polynomial::printPolynomial() const
-{
-    // The last term will be printed out first.
-    if (coefficients[coefficients.size() - 1] != 0)
+{   
+    cout << "issue occur";
+    /*
+    Polynomial order;
+    order.coefficients = coefficients;
+    order.exponents = exponents;
+    bool ifDone = false;
+    while (ifDone == false)
     {
-        cout << coefficients[coefficients.size() - 1];
-        if (exponents[exponents.size() - 1] != 0)
+        int maxExponent = 0;
+        int maxExponentIndex = 0;
+        int count = 0;
+        for (int i = 0; i < order.exponents.size(); i++)
         {
-            cout << "x";
-            if (exponents[exponents.size() - 1] > 1)
-                cout << "^" << exponents[exponents.size() - 1];
-        }
-        cout << "+";
-    }
-
-    // Print out all the terms except the last term.
-    for (int i = 0; i < coefficients.size() - 1; i++)
-    {
-        if (coefficients[i] != 0)
-        {
-            cout << coefficients[i];
-            if (exponents[i] != 0)
+            if (order.exponents[i] > maxExponent)
             {
-                cout << "x";
-                if (exponents[i] > 1)
-                    cout << "^" << exponents[i];
+                maxExponent = order.exponents[i];
+                maxExponentIndex = i;
+            }
+            else if (order.exponents[i] == 0)
+            {
+                cout << order.coefficients[i];
+                order.exponents[i] = -1;
+            }
+            else if (order.exponents[i] == -1)
+            {
+                count++;
+                if (count == order.exponents.size())
+                    ifDone = true;
             }
         }
-        else
-            continue;
-        if (i + 1 != coefficients.size() - 1)
-            cout << "+";
-    }    
+        if (order.exponents[maxExponentIndex] > 0)
+        {
+            if (order.coefficients[maxExponentIndex] > 0)
+                cout << "+";
+            else if (order.coefficients[maxExponentIndex] < 0)
+                cout << "-";
+            cout << order.coefficients[maxExponentIndex] << "x";
+
+            if (order.exponents[maxExponentIndex] != 1)
+                cout << "^" << order.exponents[maxExponentIndex];
+            order.exponents[maxExponentIndex] = -1;
+        }
+    }
+    cout << endl;
+    */
 }
 
 Polynomial Polynomial::operator+(const Polynomial& poly2) const
