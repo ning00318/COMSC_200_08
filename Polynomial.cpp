@@ -3,22 +3,25 @@
 #include "Polynomial.h"
 using namespace std;
 
+// Default constructor
 Polynomial::Polynomial()
 {
-
 }
+
 Polynomial::~Polynomial()
 {
-
 }
+
 void Polynomial::set()
 {
-
+    
 }
+
 string Polynomial::get() const
 {
 
 }
+
 void Polynomial::enterTerms()
 {
     int terms, coefficient, exponent;
@@ -36,6 +39,7 @@ void Polynomial::enterTerms()
     cout << endl;
 }
 
+// FIXME
 void Polynomial::printPolynomial() const
 {
     // The last term will be printed out first.
@@ -71,27 +75,50 @@ void Polynomial::printPolynomial() const
     }    
 }
 
-Polynomial Polynomial::operator+(const Polynomial&) const
+Polynomial Polynomial::operator+(const Polynomial& poly2) const
+{
+    Polynomial result;
+    result.coefficients = coefficients;
+    result.exponents = exponents;
+    int resultSize = result.coefficients.size();
+    int poly2Size = poly2.coefficients.size();
+
+    for (int i = 0; i < poly2Size; i++)
+    {
+        bool ifFound = false;
+        for (int j = 0; j < resultSize; j++)
+        {
+            if (poly2.exponents[i] == result.exponents[j])  // if (0 == 0, 1, 2, ...)
+            {
+                result.coefficients[j] += poly2.coefficients[i];
+                ifFound = true;
+            }
+        }
+        if (ifFound == false)
+        {
+            result.coefficients.push_back(poly2.coefficients[i]);
+            result.exponents.push_back(poly2.exponents[i]);
+        }
+    }
+    return result;
+}
+
+Polynomial Polynomial::operator-(const Polynomial& poly2) const
 {
 
 }
 
-Polynomial Polynomial::operator-(const Polynomial&) const
+Polynomial &Polynomial::operator=(const Polynomial& poly2)
 {
 
 }
 
-Polynomial &Polynomial::operator=(const Polynomial&)
+Polynomial &Polynomial::operator+=(const Polynomial& poly2)
 {
 
 }
 
-Polynomial &Polynomial::operator+=(const Polynomial&)
-{
-
-}
-
-Polynomial &Polynomial::operator-=(const Polynomial&)
+Polynomial &Polynomial::operator-=(const Polynomial& poly2)
 {
 
 }
