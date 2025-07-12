@@ -13,16 +13,6 @@ Polynomial::~Polynomial()
 {
 }
 
-void Polynomial::set()
-{
-    
-}
-
-string Polynomial::get() const
-{
-
-}
-
 void Polynomial::enterTerms()
 {
     int terms, coefficient, exponent;
@@ -41,13 +31,12 @@ void Polynomial::enterTerms()
 }
 
 void Polynomial::printPolynomial() const
-{   
-    cout << "issue occur";
-    /*
+{
     Polynomial order;
     order.coefficients = coefficients;
     order.exponents = exponents;
     bool ifDone = false;
+    int count2 = 0;
     while (ifDone == false)
     {
         int maxExponent = 0;
@@ -62,7 +51,8 @@ void Polynomial::printPolynomial() const
             }
             else if (order.exponents[i] == 0)
             {
-                cout << order.coefficients[i];
+                if (order.coefficients[i] != 0)
+                    cout << order.coefficients[i];
                 order.exponents[i] = -1;
             }
             else if (order.exponents[i] == -1)
@@ -74,19 +64,23 @@ void Polynomial::printPolynomial() const
         }
         if (order.exponents[maxExponentIndex] > 0)
         {
-            if (order.coefficients[maxExponentIndex] > 0)
-                cout << "+";
-            else if (order.coefficients[maxExponentIndex] < 0)
-                cout << "-";
-            cout << order.coefficients[maxExponentIndex] << "x";
-
-            if (order.exponents[maxExponentIndex] != 1)
-                cout << "^" << order.exponents[maxExponentIndex];
+            if (order.coefficients[maxExponentIndex] != 0)
+            {
+                cout << ((order.coefficients[maxExponentIndex] > 0) ? "+" : "-");
+                cout << order.coefficients[maxExponentIndex] << "x";
+                if (order.exponents[maxExponentIndex] != 1)
+                    cout << "^" << order.exponents[maxExponentIndex];
+            }
             order.exponents[maxExponentIndex] = -1;
         }
+        if (order.coefficients[maxExponentIndex] == 0)
+        {
+            count2++;
+            if (order.coefficients.size() == count2)
+                cout << "0";
+        }
     }
-    cout << endl;
-    */
+    cout << endl; 
 }
 
 Polynomial Polynomial::operator+(const Polynomial& poly2) const
@@ -102,7 +96,7 @@ Polynomial Polynomial::operator+(const Polynomial& poly2) const
         bool ifFound = false;
         for (int j = 0; j < resultSize; j++)
         {
-            if (poly2.exponents[i] == result.exponents[j])  // if (0 == 0, 1, 2, ...)
+            if (poly2.exponents[i] == result.exponents[j])
             {
                 result.coefficients[j] += poly2.coefficients[i];
                 ifFound = true;
@@ -119,9 +113,32 @@ Polynomial Polynomial::operator+(const Polynomial& poly2) const
 
 Polynomial Polynomial::operator-(const Polynomial& poly2) const
 {
+    Polynomial result;
+    result.coefficients = coefficients;
+    result.exponents = exponents;
+    int resultSize = result.coefficients.size();
+    int poly2Size = poly2.coefficients.size();
 
+    for (int i = 0; i < poly2Size; i++)
+    {
+        bool ifFound = false;
+        for (int j = 0; j < resultSize; j++)
+        {
+            if (poly2.exponents[i] == result.exponents[j])
+            {
+                result.coefficients[j] -= poly2.coefficients[i];
+                ifFound = true;
+            }
+        }
+        if (ifFound == false)
+        {
+            result.coefficients.push_back(poly2.coefficients[i]);
+            result.exponents.push_back(poly2.exponents[i]);
+        }
+    }
+    return result;
 }
-
+/*
 Polynomial &Polynomial::operator=(const Polynomial& poly2)
 {
 
@@ -136,3 +153,4 @@ Polynomial &Polynomial::operator-=(const Polynomial& poly2)
 {
 
 }
+*/
