@@ -141,14 +141,34 @@ Polynomial Polynomial::operator-(const Polynomial& poly2) const
 /*
 Polynomial &Polynomial::operator=(const Polynomial& poly2)
 {
-
+    
 }
-
+*/
 Polynomial &Polynomial::operator+=(const Polynomial& poly2)
 {
+    int resultSize = coefficients.size();
+    int poly2Size = poly2.coefficients.size();
 
+    for (int i = 0; i < poly2Size; i++)
+    {
+        bool ifFound = false;
+        for (int j = 0; j < resultSize; j++)
+        {
+            if (poly2.exponents[i] == exponents[j])
+            {
+                coefficients[j] += poly2.coefficients[i];
+                ifFound = true;
+            }
+        }
+        if (ifFound == false)
+        {
+            coefficients.push_back(poly2.coefficients[i]);
+            exponents.push_back(poly2.exponents[i]);
+        }
+    }
+    return *this;
 }
-
+/*
 Polynomial &Polynomial::operator-=(const Polynomial& poly2)
 {
 

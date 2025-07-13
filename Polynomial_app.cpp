@@ -18,9 +18,9 @@ int main()
    cout << "\nAdding the polynomials yields:\n";
    c = a + b;
    c.printPolynomial();
-   //cout << "\n+= the polynomials yields:\n";
-   //a += b;
-   //a.printPolynomial(); 
+   cout << "\n+= the polynomials yields:\n";
+   a += b;
+   a.printPolynomial(); 
    cout << "\nSubtracting the polynomials yields:\n";
    a = t;  // reset a to original value
    c = a - b;
