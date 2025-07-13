@@ -19,7 +19,7 @@ public:
 
     // Comment: Overload =, +=, and -= operators do not create a new Polynomial object but modify the value of the current object based on another one
     //          and return the new value to the current object (by reference), which means that the calling object's value will change but another one's remain unchanged.
-//    Polynomial &operator=(const Polynomial&);
+    Polynomial &operator=(const Polynomial&);
     Polynomial &operator+=(const Polynomial&);
     Polynomial &operator-=(const Polynomial&);
 
